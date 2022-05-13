@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import Home from "./components/Home";
+import About from "./components/About";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { Ionicons, EvilIcons } from "react-native-vector-icons";
+import Menu from "./components/Menu";
+import Tab from "./Tab";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const App = () => {
+	const Stack = createNativeStackNavigator();
+	const globalScreen = {
+		headerStyle: { backgroundColor: "gray" },
+		headerTitleStyle: { color: "yellow" },
+		headerTintColor: { color: "pink" },
+	};
+	return (
+		<NavigationContainer>
+			<SafeAreaProvider>
+				<Stack.Navigator screenOptions={globalScreen} initialRouteName="Login">
+					<Stack.Screen name="Login" component={Login} />
+					<Stack.Screen name="Tab" component={Tab} options={{ headerShown: false }} />
+				</Stack.Navigator>
+			</SafeAreaProvider>
+		</NavigationContainer>
+	);
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
+
+const styles = StyleSheet.create({});
